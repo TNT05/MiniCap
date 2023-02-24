@@ -9,4 +9,5 @@ test('renders the App component', () => {
   </Provider>);
   const linkElement = screen.getByText("Welcome to your professional community");
   expect(linkElement).toBeInTheDocument();
+  
 });
