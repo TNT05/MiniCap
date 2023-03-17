@@ -7,7 +7,7 @@ import EditForm from "./EditForm";
 import Modal from "react-modal";
 import UpdateConnections from "./UpdateConnections";
 
-Modal.setAppElement("#root"); // set the modal's parent element
+//Modal.setAppElement("#root"); // set the modal's parent element
 
 const Leftside = (props) => {
   //const [showForm, setShowForm] = useState(false);

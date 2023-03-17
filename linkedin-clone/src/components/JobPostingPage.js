@@ -48,12 +48,12 @@ const JobPostingPage = () => {
   useEffect(() => {
     async function fetchJobPosting() {
       const jobPostingDoc = doc(db, 'JobPostings', id);
-      console.log(jobPostingDoc);
+      //console.log(jobPostingDoc);
       const docSnap = await getDoc(jobPostingDoc);
-      console.log(docSnap.exists());
+      //console.log(docSnap.exists());
       if (docSnap.exists()) {
         setJobPosting(docSnap.data());
-        console.log("JOB DATA " ,docSnap.data())
+        //console.log("JOB DATA " ,docSnap.data())
       }
     }
     fetchJobPosting();
