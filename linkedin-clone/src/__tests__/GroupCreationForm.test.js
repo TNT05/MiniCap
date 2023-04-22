@@ -49,7 +49,7 @@ describe("GroupCreationForm", () => {
   //     target: { value: "Be kind and respectful" },
   //   });
   //   expect(groupRulesInput.value).toBe("Be kind and respectful");
-  // });
+  // }); 
 
   /*it("should call handleSubmit when the form is submitted", () => {
     const handleSubmitMock = jest.fn();
