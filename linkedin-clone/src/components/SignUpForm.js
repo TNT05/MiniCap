@@ -7,7 +7,7 @@ const SignUpForm = (props) => {
   const [fullName, setFullName] = useState("")
 
   return (
-    <div>
+    <div className="signup">
       <input type="email" required={true} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
       <input type="text" required={true} placeholder="Full Name" onChange={(e) => setFullName(e.target.value)} />
       <input type="password" required={true} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
