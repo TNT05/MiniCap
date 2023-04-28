@@ -21,37 +21,37 @@ const UpdateConnections = (props) => {
     setShowDm(false);
   };
   const [filteredConnections, setFilteredConnections] = useState([]);
-  useEffect(() => {
-    async function filterConnections() {
-      if (props.user && props.user.connections) {
-        const activeConnections = [];
+  // useEffect(() => {
+  //   async function filterConnections() {
+  //     if (props.user && props.user.connections) {
+  //       const activeConnections = [];
   
-        for (const connection of props.user.connections) {
-          const userRef = doc(db, "Users", connection.id);
-          const userSnapshot = await getDoc(userRef);
-          if (userSnapshot.exists()) {
-            const isActive = userSnapshot.get("active");
-            if (isActive === undefined || isActive === true) {
-              activeConnections.push(connection);
-            }
-          }
-        }
+  //       for (const connection of props.user.connections) {
+  //         const userRef = doc(db, "Users", connection.id);
+  //         const userSnapshot = await getDoc(userRef);
+  //         if (userSnapshot.exists()) {
+  //           const isActive = userSnapshot.get("active");
+  //           if (isActive === undefined || isActive === true) {
+  //             activeConnections.push(connection);
+  //           }
+  //         }
+  //       }
   
-        setFilteredConnections(activeConnections);
-      } else {
-        setFilteredConnections([]);
-      }
-    }
+  //       setFilteredConnections(activeConnections);
+  //     } else {
+  //       setFilteredConnections([]);
+  //     }
+  //   }
   
-    filterConnections();
-  }, []);
+  //   filterConnections();
+  // }, []);
 
   return (
     <ConnectionsContainer>
       <ConnectionsHeader>Connections</ConnectionsHeader>
       <ConnectionsList>
         {props.user &&
-          filteredConnections.map((connection) => (
+          props.user.connections.map((connection) => (
             <ConnectionItem key={connection.id}>
               {connection.photoURL ? (
                 <ConnectionPhoto src={connection.photoURL} alt="" />
@@ -86,7 +86,6 @@ const ConnectionsContainer = styled.div`
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   padding: 16px;
-  height: 100%;
   border-radius: 10px;
 `;
 
