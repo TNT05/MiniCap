@@ -9,17 +9,19 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 const storage = getStorage();
 
+// EditPostForm component handles the form for editing a post
 const EditPostForm = ({ post, onUpdate, onClose }) => {
   const [postTitle, setPostTitle] = useState(post.postTitle);
   const [postDescription, setPostDescription] = useState(post.postDescription);
   const [postImage, setPostImage] = useState(null);
 
+  // Function to handle post image edit
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       setPostImage(e.target.files[0]);
     }
   };
-
+  // Function to handle edit submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -81,11 +83,12 @@ const EditPostForm = ({ post, onUpdate, onClose }) => {
   );
 };
 
+// PostLikes component shows the number of likes and allows the user to like/unlike a post
 const PostLikes = ({ postId, userId }) => {
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const { id } = useParams();
-
+// The PostLikes component displays the number of likes for a post and allows the user to like or unlike the post
   useEffect(() => {
     if (userId) {
       const postLikesRef = collection(doc(db, 'Pages', id), 'Posts', postId, 'Likes');
@@ -109,6 +112,7 @@ const PostLikes = ({ postId, userId }) => {
     }
   }, [id, postId, userId]);
 
+  // Function to like a post
   const handleLike = async () => {
     const postLikeRef = doc(doc(db, 'Pages', id), 'Posts', postId, 'Likes', userId.uid);
     if (liked) {
@@ -129,16 +133,17 @@ const PostLikes = ({ postId, userId }) => {
 
 
 
-
+// Comment component renders a single comment with edit and delete options for the comment's author
 const Comment = ({ comment, user, onEdit, onDelete }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editText, setEditText] = useState(comment.text);
 
+  // Function to handle edit a comment
   const handleSaveEdit = () => {
     onEdit(comment.id, editText);
     setIsEditMode(false);
   };
-
+  // Function to handle comment delete
   const handleDelete = () => {
     onDelete(comment.id);
   };
@@ -172,7 +177,7 @@ const Comment = ({ comment, user, onEdit, onDelete }) => {
   );
 };
 
-
+// CommentsList component handles fetching and rendering a list of comments for a specific post
 const CommentsList = ({ postId }) => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
@@ -228,6 +233,7 @@ const CommentsList = ({ postId }) => {
   );
 };
 
+// NewCommentForm component handles the form for submitting a new comment for a post
 const NewCommentForm = ({ postId }) => {
   const { id } = useParams();
   const [commentText, setCommentText] = useState('');
@@ -267,17 +273,7 @@ const NewCommentForm = ({ postId }) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
+// EditPostButton component renders a button to trigger the post editing process
 const EditPostButton = ({ onClick }) => {
   return (
     <StyledButton onClick={onClick}>
@@ -286,6 +282,7 @@ const EditPostButton = ({ onClick }) => {
   );
 };
 
+// DeletePostButton component renders a button to delete a post and handles the deletion confirmation process
 const DeletePostButton = ({ onClick }) => {
   const handleClick = async () => {
     if (window.confirm("Are you sure you want to delete this post? This action cannot be undone.")) {
@@ -309,15 +306,21 @@ const DeletePostButton = ({ onClick }) => {
   );
 };
 
+// PageDetails component handles the display of the details and posts of a page
 const PageDetails = () => {
+  // Get page id 
   const { id } = useParams();
+  // State variables for page, posts, and user's ownership of the page
   const [page, setPage] = useState(null);
   const [posts, setPosts] = useState([]);
   const [isUserPage, setIsUserPage] = useState(false);
+  // Get the current user
   const userId = getAuth().currentUser;
+  // State variable to control the display of the page edit form
   const [isEditing, setIsEditing] = useState(false);
   const [updatedPosts, setUpdatedPosts] = useState([]);
 
+  // Fetch page details and posts when the component mounts or userId changes
   useEffect(() => {
     if (userId) {
       const fetchPageDetails = async () => {
@@ -356,6 +359,7 @@ const PageDetails = () => {
     }
   }, [id, userId]);
 
+  // Function to handle new post submission
   const handlePostSubmit = async (newPost) => {
     try {
       const postsRef = collection(doc(db, 'Pages', id), 'Posts');
@@ -366,6 +370,7 @@ const PageDetails = () => {
     }
   };
 
+  // Function to handle page edit
   const handlePageEdit = async (updatedPage) => {
     try {
       const pageRef = doc(db, 'Pages', id);
@@ -377,7 +382,7 @@ const PageDetails = () => {
     }
   };
 
-
+  // Function to handle page delete
   const handlePageDelete = async () => {
     if (window.confirm("Are you sure you want to delete this page? This action cannot be undone.")) {
       try {
@@ -462,6 +467,8 @@ const PageDetails = () => {
     </Container>
   );
 };
+
+// EditPageForm component renders the form for editing a page's information
 const EditPageForm = ({ page, onSubmit, onCancel }) => {
   const [pageName, setPageName] = useState(page.pageName);
   const [pageDescription, setPageDescription] = useState(page.pageDescription);
@@ -696,6 +703,9 @@ const PostsList = ({ posts, isUserPage, onUpdate, onDelete }) => {
     </PostListContainer>
   );
 };
+
+
+//styling
 const Container = styled.div`
   padding: 50px;
   text-align: center;

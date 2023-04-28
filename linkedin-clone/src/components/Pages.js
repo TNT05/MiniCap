@@ -5,12 +5,18 @@ import { getAuth } from 'firebase/auth';
 import { collection, getDocs} from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 
+// This functional component renders a list of pages owned by the current user and other users.
 const Pages = () => {
+
+  // State hook for storing an array of the current user's pages.
   const [myPages, setMyPages] = useState([]);
+  // State hook for storing an array of other users' pages.
   const [allPages, setAllPages] = useState([]);
 
+  // Get the current user's information.
   const userId = getAuth().currentUser;
 
+  // useEffect hook for fetching pages and setting state when the component mounts and when the userId changes.
   useEffect(() => {
     if(userId) {
       const fetchPages = async () => {
