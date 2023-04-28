@@ -7,7 +7,7 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
   const [resetPassword, setResetPassword] = useState(false);
   return (
-    <div className="form">
+    <div className="login">
       <input type="email" required={true} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
       <input type="password" required={true} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
       <a onClick={() => setResetPassword(!resetPassword)} style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}>Forgot Password?</a><br />

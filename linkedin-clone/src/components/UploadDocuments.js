@@ -164,20 +164,21 @@ const UploadDocuments = (props) => {
       <h1>MY DOCUMENTS</h1>
       <div>
         <label>Resume</label>
-        <input
+        <input className="resume"
           type="file"
           onChange={(e) => setSelectedResume(e.target.files[0])}
         />
-        <button onClick={uploadResume}>Upload</button>
+        <button className="resumeUpload" onClick={uploadResume}>Upload</button>
       </div>
 
       <div>
         <label>Cover Letter</label>
         <input
+        className="cover"
           type="file"
           onChange={(e) => setSelectedCoverLetter(e.target.files[0])}
         />
-        <button onClick={uploadCoverLetter}>Upload</button>
+        <button className="coverUpload" onClick={uploadCoverLetter}>Upload</button>
       </div>
 
       <table>

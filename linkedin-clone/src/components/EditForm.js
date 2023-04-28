@@ -248,7 +248,7 @@ const EditForm = (props) => {
           <input type="text" name="location" value={work.location} onChange={(event) => handleWorkExperienceChange(event, index)} />
           <br />
           <label>Description:</label>
-          <textarea name="description" value={work.description} onChange={(event) => handleWorkExperienceChange(event, index)} />
+          <textarea id="jobDescription" name="description" value={work.description} onChange={(event) => handleWorkExperienceChange(event, index)} />
           <br />
           <button type="button" className="remove-button" onClick={() => handleRemoveWorkExperience(index)}>Remove Work Experience</button>
         </div>
@@ -291,7 +291,7 @@ const EditForm = (props) => {
           <input type="text" name="endDate" value={volunteer.endDate} onChange={(event) => handleVolunteeringChange(event, index)} />
           <br />
           <label>Description:</label>
-          <textarea name="description" value={volunteer.description} onChange={(event) => handleVolunteeringChange(event, index)} />
+          <textarea id="volunteerDescription" name="description" value={volunteer.description} onChange={(event) => handleVolunteeringChange(event, index)} />
           <br />
           <button type="button" className="remove-button" onClick={() => handleRemoveVolunteering(index)}>Remove Volunteering Experience</button>
         </div>
